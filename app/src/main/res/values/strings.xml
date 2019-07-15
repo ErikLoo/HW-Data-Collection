@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DataCollectionApp</string>
+    <string name="action_settings">Settings</string>
+    <string name="EnterPays_atomPay_nameHint">new intention</string>
+    <string name="EnterPays_TextView_ZeroValue">0</string>
+    <string name="EnterPays_addPayment">Add Payment</string>
+    <string name="the_second_activity">the second activity</string>
+
+</resources>
