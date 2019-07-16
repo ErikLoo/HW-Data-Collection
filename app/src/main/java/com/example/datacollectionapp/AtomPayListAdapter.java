@@ -46,9 +46,9 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 		holder.editButton.setTag(holder.atomPayment);
 
 		holder.name = (TextView)row.findViewById(R.id.atomPay_name);
-		setNameTextChangeListener(holder);
+		//setNameTextChangeListener(holder);
 		holder.value = (TextView)row.findViewById(R.id.atomPay_value);
-		setValueTextListeners(holder);
+		//setValueTextListeners(holder);
 
 		row.setTag(holder);
 

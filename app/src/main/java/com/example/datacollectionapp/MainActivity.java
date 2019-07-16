@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -16,12 +17,14 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private AtomPayListAdapter adapter;
     private View itemView;
     private ImageButton button_edit;
+    private static final int REQUEST_CODE = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +70,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void edit_configuration(View v)
     {
+        //add a confirmation dialogue here: Entering edit mode will toggle off data labelling. Are you sure you would like to continue?
+        itemView = v; // pass the reference to a global view variable because View v can not be accessed in the inner loop
         Intent intent = new Intent("com.example.datacollectionapp.config_activity" );
-        startActivity(intent);
+        startActivityForResult(intent,REQUEST_CODE);
     }
 
     public void removeAtomPayOnClickHandler(View v) { // remove a list item
@@ -104,5 +109,14 @@ public class MainActivity extends AppCompatActivity {
         adapter.insert(new AtomPayment("", 0), 0);// create an entry after pushing the button
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            if (data.hasExtra("act_name")) {
+                //set the text to string
+                AtomPayment itemToEdit = (AtomPayment)itemView.getTag(); //find that particular view
+                itemToEdit.setName(data.getExtras().getString("act_name"));
+            }
+        }
+    }
 }
