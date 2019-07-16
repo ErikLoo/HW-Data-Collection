@@ -9,14 +9,14 @@
         android:id="@+id/atomPay_name"
         android:layout_width="0sp"
         android:layout_height="fill_parent"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:gravity="center_vertical"
         android:hint="@string/EnterPays_atomPay_nameHint"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <EditText
         android:id="@+id/atomPay_value"
-        android:layout_width="0sp"
+        android:layout_width="10sp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:gravity="center"
@@ -24,10 +24,16 @@
         android:text="@string/EnterPays_TextView_ZeroValue"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent" />
+
     <ImageButton
         android:id="@+id/edit_button"
         android:layout_width="@dimen/width_button"
         android:layout_height="fill_parent"
+        android:onClick="edit_configuration"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
     <ImageButton

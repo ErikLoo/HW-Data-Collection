@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 
 	protected static final String LOG_TAG = AtomPayListAdapter.class.getSimpleName();
-	
+
 	private List<AtomPayment> items;
 	private int layoutResourceId;
 	private Context context;
@@ -40,7 +40,10 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 		holder = new AtomPaymentHolder();
 		holder.atomPayment = items.get(position);
 		holder.removePaymentButton = (ImageButton)row.findViewById(R.id.atomPay_removePay);
-		holder.removePaymentButton.setTag(holder.atomPayment);
+		holder.removePaymentButton.setTag(holder.atomPayment); //The tag of a view can store data
+
+		holder.editButton = (ImageButton)row.findViewById(R.id.edit_button);
+		holder.editButton.setTag(holder.atomPayment);
 
 		holder.name = (TextView)row.findViewById(R.id.atomPay_name);
 		setNameTextChangeListener(holder);
@@ -63,8 +66,9 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 		TextView name;
 		TextView value;
 		ImageButton removePaymentButton;
+		ImageButton editButton;
 	}
-	
+
 	private void setNameTextChangeListener(final AtomPaymentHolder holder) {
 		holder.name.addTextChangedListener(new TextWatcher() {
 
