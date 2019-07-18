@@ -14,14 +14,14 @@
         android:hint="@string/EnterPays_atomPay_nameHint"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <EditText
+    <TextView
         android:id="@+id/atomPay_value"
         android:layout_width="10sp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:gravity="center"
         android:inputType="numberDecimal"
-        android:text="@string/EnterPays_TextView_ZeroValue"
+        android:hint="Collection Status"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <Switch

@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         //add a remove confirmation here before actually removing the entry
         itemView = v; // pass the reference to a global view variable because View v can not be accessed in the inner loop
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to remove this item?")
+        builder.setMessage("Are you sure you want to remove this item: " + ((AtomPayment)itemView.getTag()).getName()+" ?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 //set the text to string
                 AtomPayment itemToEdit = (AtomPayment)itemView.getTag(); //find that particular view
                 itemToEdit.setName(data.getExtras().getString("act_name"));
+                adapter.notifyDataSetChanged();//notify the data set has changed and nay view reflecing the data set should referesh itself
             }
         }
     }
