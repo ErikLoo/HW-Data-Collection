@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private View itemView;
     private ImageButton button_edit;
     private static final int REQUEST_CODE = 10;
+    private AtomPayment gAtomPayment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() { //set up the onclick listern for the floating action button
             @Override
             public void onClick(View view) {
-                setupAddPaymentButton();
+//                setupAddPaymentButton();
+                intialize_new_entry();
             }
         });
 
@@ -68,10 +71,22 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void intialize_new_entry() {
+        itemView = null;
+        setupAddPaymentButton();
+        open_edit_page();
+    }
+
     public void edit_configuration(View v)
     {
         //add a confirmation dialogue here: Entering edit mode will toggle off data labelling. Are you sure you would like to continue?
         itemView = v; // pass the reference to a global view variable because View v can not be accessed in the inner loop
+//        Intent intent = new Intent("com.example.datacollectionapp.config_activity" );
+//        startActivityForResult(intent,REQUEST_CODE);
+        open_edit_page();
+    }
+
+    public void open_edit_page() {
         Intent intent = new Intent("com.example.datacollectionapp.config_activity" );
         startActivityForResult(intent,REQUEST_CODE);
     }
@@ -99,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    public void removeButton() {
+        adapter.remove(gAtomPayment);
+    }
+
     private void setupListViewAdapter() {
         adapter = new AtomPayListAdapter(MainActivity.this, R.layout.list_item, new ArrayList<AtomPayment>());
         ListView atomPaysListView = (ListView)findViewById(R.id.EnterPays_atomPaysList);
@@ -106,7 +125,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupAddPaymentButton() { // add a list item
-        adapter.insert(new AtomPayment("", 0), 0);// create an entry after pushing the button
+        AtomPayment mAtomPayment = new AtomPayment("",0);
+        adapter.insert(mAtomPayment, 0);// create an entry after pushing the button
+        gAtomPayment = mAtomPayment; //assign the value to a global variable;
+
+//        adapter.insert(new AtomPayment("", 0), 0);// create an entry after pushing the button
     }
 
     @Override
@@ -114,10 +137,19 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             if (data.hasExtra("act_name")) {
                 //set the text to string
-                AtomPayment itemToEdit = (AtomPayment)itemView.getTag(); //find that particular view
-                itemToEdit.setName(data.getExtras().getString("act_name"));
+                if(itemView!=null) { // triggering by clicking the edit button
+                    AtomPayment itemToEdit = (AtomPayment) itemView.getTag(); //find that particular view
+                    itemToEdit.setName(data.getExtras().getString("act_name"));
+                } else { //triggering by clicking the fab button
+                    gAtomPayment.setName(data.getExtras().getString("act_name"));
+                }
                 adapter.notifyDataSetChanged();//notify the data set has changed and nay view reflecing the data set should referesh itself
             }
+        }
+
+        if (resultCode == RESULT_CANCELED) {
+            //Log.d("TAG", "RESULT_CANCELED");
+            removeButton();
         }
     }
 }

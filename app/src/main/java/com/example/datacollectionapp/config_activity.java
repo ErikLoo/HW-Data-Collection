@@ -75,6 +75,10 @@ public class config_activity extends AppCompatActivity {
         finish();
     }
 
+    public void cancel_edit(View v) {
+        cancel();
+    }
+
     private void loadDatas(){
 
         for(int i=0;i<=23;i++){
@@ -95,7 +99,7 @@ public class config_activity extends AppCompatActivity {
         scrollChoiceMins = (ScrollChoice)findViewById(R.id.scroll_choice_minute);
     }
 
-    public void finish() {
+    public void finish( ) {
         //put extra data to the intent
         Intent data = new Intent();
         data.putExtra("act_name",act_name);
@@ -104,4 +108,11 @@ public class config_activity extends AppCompatActivity {
         super.finish();
     }
 
+    public void cancel() {
+        Intent data = new Intent();
+        data.putExtra("act_name",act_name);
+        data.putExtra("comment",comment);
+        setResult(RESULT_CANCELED,data);
+        super.finish();
+    }
 }

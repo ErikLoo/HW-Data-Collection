@@ -94,6 +94,11 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 			public boolean onTouch(View v, MotionEvent event) {
 				//Log.d("TAG", holder.name.getText() + "Has been touched");
 				//return mDetector.onTouchEvent(event);
+				if(event.getAction() == MotionEvent.ACTION_OUTSIDE){
+					//if(holder.atomPayment.getExtend()==true) retract_view(holder);
+					Log.d("TAG", "Fell outside");
+
+				}
 				if(event.getAction() == MotionEvent.ACTION_DOWN){
 
 					// Do what you want
