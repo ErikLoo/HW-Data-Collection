@@ -7,6 +7,7 @@ public class AtomPayment implements Serializable {
 	
 	private String name = "";
 	private double value = 0;
+	private boolean extension = false;
 
 	public AtomPayment(String name, double value) {
 		this.setName(name);
@@ -28,4 +29,10 @@ public class AtomPayment implements Serializable {
 	public void setValue(double value) {
 		this.value = value;
 	}
+
+	public boolean getExtend() {return extension;}
+
+	public void setTrue() {extension = true;}
+
+	public void setFalse() {extension = false;}
 }
