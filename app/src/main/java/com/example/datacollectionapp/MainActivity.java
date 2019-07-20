@@ -126,7 +126,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupAddPaymentButton() { // add a list item
         AtomPayment mAtomPayment = new AtomPayment("",0);
-        adapter.insert(mAtomPayment, 0);// create an entry after pushing the button
+     //   adapter.insert(mAtomPayment, 0);// add an entry to the specified index of the array
+        adapter.add(mAtomPayment);// add an entry to the end of the array adapter
         gAtomPayment = mAtomPayment; //assign the value to a global variable;
 
 //        adapter.insert(new AtomPayment("", 0), 0);// create an entry after pushing the button

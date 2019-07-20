@@ -22,14 +22,12 @@ public class config_activity extends AppCompatActivity {
 
     //variables for storing useful data
     private String act_name;
-    private String comment;
     private String start_time_hr;
     private String start_time_min;
     private String duration;
     private String week_day; //in the form of 0010010
 
     private TextView act_name_view;
-    private TextView comment_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +57,6 @@ public class config_activity extends AppCompatActivity {
         });
 
         act_name_view = (TextView) findViewById(R.id.act_name);
-        comment_view =  (TextView) findViewById(R.id.comment);
     }
 
     public class settingData
@@ -71,7 +68,6 @@ public class config_activity extends AppCompatActivity {
     public void save_setting_data(View v) //onClick function associated with button "save"
     {
         act_name = act_name_view.getText().toString();
-        comment = comment_view.getText().toString();
         finish();
     }
 
@@ -103,7 +99,7 @@ public class config_activity extends AppCompatActivity {
         //put extra data to the intent
         Intent data = new Intent();
         data.putExtra("act_name",act_name);
-        data.putExtra("comment",comment);
+//        data.putExtra("comment",comment);
         setResult(RESULT_OK,data);
         super.finish();
     }
@@ -111,7 +107,7 @@ public class config_activity extends AppCompatActivity {
     public void cancel() {
         Intent data = new Intent();
         data.putExtra("act_name",act_name);
-        data.putExtra("comment",comment);
+//        data.putExtra("comment",comment);
         setResult(RESULT_CANCELED,data);
         super.finish();
     }
