@@ -1,6 +1,8 @@
 package com.example.datacollectionapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -71,8 +73,16 @@ public class config_activity extends AppCompatActivity {
         finish();
     }
 
-    public void cancel_edit(View v) {
-        cancel();
+    @Override
+    public void onBackPressed() { //if the "back" key was pressed...
+
+        ready_to_cancel_activity();
+
+    }
+
+    public void cancel_edit(View v) { //if the "cancel" button has been pressed
+//        cancel();
+        ready_to_cancel_activity();
     }
 
     private void loadDatas(){
@@ -102,6 +112,29 @@ public class config_activity extends AppCompatActivity {
 //        data.putExtra("comment",comment);
         setResult(RESULT_OK,data);
         super.finish();
+    }
+
+
+    public void ready_to_cancel_activity() { //if the "back" key was pressed...
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to exit without saving?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        cancel();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel(); //do nothing if "no" is pressed
+                    }
+                });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
     }
 
     public void cancel() {

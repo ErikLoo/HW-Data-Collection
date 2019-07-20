@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".config_activity">
+        <activity
+            android:name=".config_activity"
+            android:label="Adding New Intention"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.example.datacollectionapp.config_activity"  />
 
