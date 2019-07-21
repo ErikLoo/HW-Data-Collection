@@ -47,8 +47,8 @@ public class config_activity_improved extends AppCompatActivity {
     }
 
     private void set_up_view_items(){
-        add_view_item("Specify date and time","time");
-        add_view_item("Specify location","location");
+        add_view_item("Specify a time and date","time");
+        add_view_item("Specify a location","location");
         add_view_item("Specify exclusions and inclusions","constraint");
 
         config_adapter.notifyDataSetChanged();//notify the data set has changed and nay view reflecing the data set should referesh itself
@@ -69,8 +69,8 @@ public class config_activity_improved extends AppCompatActivity {
         final int request_constraint= 3;
 
         if(itemToEdit.getID()=="time") {
-//            Intent intent = new Intent("com.example.datacollectionapp.config_activity_improved" );
-//            startActivityForResult(intent,request_time);
+           Intent intent = new Intent("com.example.datacollectionapp.setup_time" );
+           startActivityForResult(intent,request_time);
             Log.d("TAG", "time");
         }
         else if(itemToEdit.getID()=="location") {

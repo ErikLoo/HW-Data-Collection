@@ -17,18 +17,10 @@
         android:layout_width="319dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:background="@color/colorPrimary"
         android:gravity="center"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground"
         android:onClick="open_edit_page"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <ImageView
-        android:id="@+id/arrow_view"
-        android:layout_width="33dp"
-        android:layout_height="fill_parent"
-        android:adjustViewBounds="true"
-        android:scaleType="centerInside"
-        android:background="@color/colorPrimary"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/left_arrow" />
 </LinearLayout>
