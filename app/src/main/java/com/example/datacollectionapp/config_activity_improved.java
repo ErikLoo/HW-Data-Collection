@@ -79,8 +79,8 @@ public class config_activity_improved extends AppCompatActivity {
             Log.d("TAG", "location");
         }
         else if(itemToEdit.getID()=="constraint") {
-//            Intent intent = new Intent("com.example.datacollectionapp.config_activity_improved" );
-//            startActivityForResult(intent,request_time);
+            Intent intent = new Intent("com.example.datacollectionapp.setup_criteria"  );
+            startActivityForResult(intent,request_constraint);
             Log.d("TAG", "constraint");
         }
     }

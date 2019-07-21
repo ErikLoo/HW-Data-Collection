@@ -53,6 +53,17 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".setup_criteria"
+            android:label="Set up criteria"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="com.example.datacollectionapp.setup_criteria"  />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
