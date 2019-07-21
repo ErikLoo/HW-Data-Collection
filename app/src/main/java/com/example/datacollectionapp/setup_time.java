@@ -7,6 +7,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.webianks.library.scroll_choice.ScrollChoice;
 
@@ -26,6 +28,9 @@ public class setup_time extends AppCompatActivity {
     //variables for storing useful data
     private String act_name;
 
+    private SeekBar seek_bar;
+    private TextView seek_view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +39,8 @@ public class setup_time extends AppCompatActivity {
         iniViews();
 
         loadDatas();
+
+        set_seek_bar();
 
         scrollChoiceHour.addItems(datasHour,0); //save this index somewhere
         scrollChoiceHour.setOnItemSelectedListener(new ScrollChoice.OnItemSelectedListener() {
@@ -53,6 +60,34 @@ public class setup_time extends AppCompatActivity {
 
         setup_the_week();
 
+    }
+
+    public void set_seek_bar() {
+        seek_bar = (SeekBar)findViewById(R.id.seekBar2);
+        seek_view = (TextView)findViewById(R.id.seekView);
+       seek_view.setText(Integer.toString(seek_bar.getProgress()/10));
+//
+        seek_bar.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+                    int progress_value;
+
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        progress_value = progress;
+                        seek_view.setText(Integer.toString(progress/10));
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        seek_view.setText(Integer.toString(progress_value/10));
+                    }
+                }
+        );
     }
 
     private void loadDatas(){
