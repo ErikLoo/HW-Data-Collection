@@ -87,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void open_edit_page() {
-        Intent intent = new Intent("com.example.datacollectionapp.config_activity" );
+        Intent intent = new Intent("com.example.datacollectionapp.config_activity_improved" );
+//        Intent intent = new Intent("com.example.datacollectionapp.config_activity" );
         startActivityForResult(intent,REQUEST_CODE);
     }
 

@@ -97,7 +97,6 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 				if(event.getAction() == MotionEvent.ACTION_OUTSIDE){
 					//if(holder.atomPayment.getExtend()==true) retract_view(holder);
 					Log.d("TAG", "Fell outside");
-
 				}
 				if(event.getAction() == MotionEvent.ACTION_DOWN){
 

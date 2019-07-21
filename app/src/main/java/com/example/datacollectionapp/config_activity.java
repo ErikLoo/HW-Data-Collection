@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -59,6 +60,8 @@ public class config_activity extends AppCompatActivity {
         });
 
         act_name_view = (TextView) findViewById(R.id.act_name);
+
+        Log.d("TAG", "config has been called");
     }
 
     public class settingData

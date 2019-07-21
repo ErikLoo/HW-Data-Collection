@@ -1,0 +1,78 @@
+package com.example.datacollectionapp;
+
+import android.app.Activity;
+import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.Switch;
+import android.widget.TextView;
+
+import java.util.List;
+
+public class ConfigListAdapter extends ArrayAdapter<AtomPayment> {
+
+	protected static final String LOG_TAG = ConfigListAdapter.class.getSimpleName();
+
+	private List<AtomPayment> items;
+	private int layoutResourceId;
+	private Context context;
+	private GestureDetector mDetector;
+	private boolean retract = false;
+	private AtomPaymentHolder globalHolder = null;
+
+	public ConfigListAdapter(Context context, int layoutResourceId, List<AtomPayment> items) {
+		super(context, layoutResourceId, items);
+		this.layoutResourceId = layoutResourceId;
+		this.context = context;
+		this.items = items;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		View row = convertView;
+		AtomPaymentHolder holder = null;
+
+		LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+		row = inflater.inflate(layoutResourceId, parent, false);
+
+		holder = new AtomPaymentHolder();
+		holder.atomPayment = items.get(position);
+
+		holder.switchButton = (Switch)row.findViewById(R.id.switch3);
+		holder.switchButton.setTag(holder.atomPayment);
+
+		holder.name = (TextView)row.findViewById(R.id.label_name);
+		holder.name.setTag(holder.atomPayment);
+
+		row.setTag(holder);
+
+		setupItem(holder);
+
+		Log.i("TAG", "getView() has been called");
+
+		return row;
+	}
+
+	private void setupItem(AtomPaymentHolder holder) {
+		holder.name.setText(holder.atomPayment.getName());
+	}
+
+	public static class AtomPaymentHolder {// this is just a data structure
+		AtomPayment atomPayment;
+		TextView name;
+		TextView value;
+		ImageButton removePaymentButton;
+		ImageButton editButton;
+		Switch switchButton;
+	}
+
+
+}
