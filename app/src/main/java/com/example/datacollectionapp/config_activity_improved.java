@@ -3,17 +3,14 @@ package com.example.datacollectionapp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.webianks.library.scroll_choice.ScrollChoice;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class config_activity_improved extends AppCompatActivity {
 
