@@ -49,7 +49,7 @@ public class config_activity_improved extends AppCompatActivity {
     private void set_up_view_items(){
         add_view_item("Specify a time and date","time");
         add_view_item("Specify a location","location");
-        add_view_item("Specify exclusions and inclusions","constraint");
+        add_view_item("Other criteria","constraint");
 
         config_adapter.notifyDataSetChanged();//notify the data set has changed and nay view reflecing the data set should referesh itself
 

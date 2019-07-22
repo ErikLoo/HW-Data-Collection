@@ -1,4 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="width_button">46sp</dimen>
+    <dimen name="spacing_between_weekdays">20dp</dimen>
 </resources>

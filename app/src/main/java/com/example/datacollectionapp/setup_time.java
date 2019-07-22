@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -12,7 +13,10 @@ import android.widget.TextView;
 
 import com.webianks.library.scroll_choice.ScrollChoice;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class setup_time extends AppCompatActivity {
@@ -31,6 +35,8 @@ public class setup_time extends AppCompatActivity {
     private SeekBar seek_bar;
     private TextView seek_view;
 
+    Calendar currentTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +48,15 @@ public class setup_time extends AppCompatActivity {
 
         set_seek_bar();
 
-        scrollChoiceHour.addItems(datasHour,0); //save this index somewhere
+        //if no save_file is detected
+        currentTime = Calendar.getInstance();
+        int default_hour= currentTime.get(Calendar.HOUR_OF_DAY);
+        int default_min = currentTime.get(Calendar.MINUTE);
+
+        System.out.println("hour: " + default_hour);
+        System.out.println("min: " + default_min);
+
+        scrollChoiceHour.addItems(datasHour,default_hour); //set the default hour to the current hour
         scrollChoiceHour.setOnItemSelectedListener(new ScrollChoice.OnItemSelectedListener() {
             @Override
             public void onItemSelected(ScrollChoice scrollChoice, int position, String name) {
@@ -50,7 +64,7 @@ public class setup_time extends AppCompatActivity {
             }
         });
 
-        scrollChoiceMins.addItems(datasMins,0);
+        scrollChoiceMins.addItems(datasMins,default_min); //set the defualt minute to the current minute
         scrollChoiceMins.setOnItemSelectedListener(new ScrollChoice.OnItemSelectedListener() {
             @Override
             public void onItemSelected(ScrollChoice scrollChoice, int position, String name) {
@@ -64,6 +78,8 @@ public class setup_time extends AppCompatActivity {
 
     public void set_seek_bar() {
         seek_bar = (SeekBar)findViewById(R.id.seekBar2);
+        seek_bar.setProgress(50);  //set the defualt value of the seebar view to be 50
+
         seek_view = (TextView)findViewById(R.id.seekView);
        seek_view.setText(Integer.toString(seek_bar.getProgress()/10));
 //
