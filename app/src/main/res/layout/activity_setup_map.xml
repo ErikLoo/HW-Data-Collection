@@ -7,13 +7,17 @@
     android:translationY="14sp"
     tools:context=".setup_map">
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="313dp"
-        android:layout_height="285dp"
-        android:layout_marginEnd="49dp"
-        android:layout_marginRight="49dp"
-        android:layout_marginBottom="380dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="392dp"
+        android:layout_height="484dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></fragment>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

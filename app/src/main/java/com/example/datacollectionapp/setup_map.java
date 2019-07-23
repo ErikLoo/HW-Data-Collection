@@ -10,35 +10,36 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.webianks.library.scroll_choice.ScrollChoice;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class setup_map extends AppCompatActivity {
+public class setup_map extends FragmentActivity implements OnMapReadyCallback {
 
-
-    List<String> datasHour = new ArrayList<>();
-    List<String> datasMins = new ArrayList<>();
-
-    //variables for making the scroll clock interface
-    ScrollChoice scrollChoiceHour;
-    ScrollChoice scrollChoiceMins;
 
     //variables for storing useful data
     private String act_name;
 
-    private SeekBar seek_bar;
-    private TextView seek_view;
-
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_map);
 
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
     }
 
@@ -92,5 +93,15 @@ public class setup_map extends AppCompatActivity {
 //        data.putExtra("comment",comment);
         setResult(RESULT_CANCELED,data);
         super.finish();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Sydney, Australia, and move the camera.
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
