@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class setup_criteria extends AppCompatActivity {
 
@@ -23,6 +24,10 @@ public class setup_criteria extends AppCompatActivity {
     private String week_day; //in the form of 0010010
 
     private TextView act_name_view;
+
+    private int[] checkStatus = new int[6];
+
+    private AtomPayment item_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,32 +48,62 @@ public class setup_criteria extends AppCompatActivity {
         atomPaysListView.setAdapter(criteria_adapter);
     }
 
+    public void checkTracker(View v) { //if one of the weekday was pressed
+        AtomPayment condition = (AtomPayment) v.getTag();
+
+        if(condition.getCheck()==false) {
+            condition.setChecked(true);
+            checkStatus[Integer.parseInt(condition.getID())] = 1;
+        }
+        else {
+            condition.setChecked(false);
+            checkStatus[Integer.parseInt(condition.getID())] = 0;
+        }
+
+        //record the current status of the weekdays
+    }
+
     private void set_up_view_items(){
-        add_view_item("The user is travelling","Travel");
-        add_view_item("The user is taking a shower","Shower");
-        add_view_item("The user is cooking","Cooking");
-        add_view_item("The user is not doing anything","Nothing");
+        add_view_item("You are walking","0");
+        add_view_item("You are taking a shower","1");
+        add_view_item("You are cooking","2");
+        add_view_item("You are holding the phone","3");
+        add_view_item("You are looking at the phone","4");
+        add_view_item("The phone has not moved for a while","5");
+
 
         criteria_adapter.notifyDataSetChanged();//notify the data set has changed and nay view reflecing the data set should referesh itself
 
     }
 
     private void add_view_item(String item_name, String id) { // add a list item
+
         AtomPayment mAtomPayment = new AtomPayment(item_name,0);
         mAtomPayment.setID(id);
+
+        item_data = (AtomPayment) getIntent().getSerializableExtra("push_data");
+        if(item_data.getConditions()!=null) {
+            String[] condtion_input = item_data.getConditions().split(",");
+            if(condtion_input[Integer.parseInt(id)].replaceAll("\\[","").replaceAll("\\]","").trim().equals("1")) {
+                mAtomPayment.setChecked(true);
+                checkStatus[Integer.parseInt(id)] = 1;
+            }
+        }
+
         criteria_adapter.add(mAtomPayment);// add an entry to the end of the array adapter
+
+//
     }
 
     public void save_setting_data(View v) //onClick function associated with button "save"
     {
-        act_name = act_name_view.getText().toString();
         finish();
     }
 
     @Override
     public void onBackPressed() { //if the "back" key was pressed...
 
-        cancel();
+        finish();
 
     }
 
@@ -79,7 +114,8 @@ public class setup_criteria extends AppCompatActivity {
 
     public void finish( ) {
         Intent data = new Intent();
-        data.putExtra("act_name",act_name);
+        System.out.println(Arrays.toString(checkStatus));
+        data.putExtra("checked", Arrays.toString(checkStatus));
         setResult(RESULT_OK,data);
         super.finish();
     }

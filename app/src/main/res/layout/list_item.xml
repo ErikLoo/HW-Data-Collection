@@ -23,6 +23,7 @@
         android:id="@+id/edit_button"
         android:layout_width="@dimen/width_button"
         android:layout_height="fill_parent"
+        android:background="@color/colorPrimary"
         android:onClick="edit_configuration"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
@@ -30,7 +31,8 @@
         android:id="@+id/atomPay_removePay"
         android:layout_width="@dimen/width_button"
         android:layout_height="fill_parent"
+        android:background="@color/colorPrimary"
         android:contentDescription="@string/app_name"
         android:onClick="removeAtomPayOnClickHandler"
-        android:src="@android:drawable/ic_delete" />
+        android:src="@android:drawable/ic_menu_close_clear_cancel" />
 </LinearLayout>

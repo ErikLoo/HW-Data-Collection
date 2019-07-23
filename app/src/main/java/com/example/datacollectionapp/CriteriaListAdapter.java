@@ -47,6 +47,8 @@ public class CriteriaListAdapter extends ArrayAdapter<AtomPayment> {
 		holder.checkbox = (CheckBox) row.findViewById(R.id.checkBox);
 		holder.checkbox.setTag(holder.atomPayment);
 
+		if(holder.atomPayment.getCheck()==true) {holder.checkbox.setChecked(true);}; //check the check box
+
 		holder.name = (TextView)row.findViewById(R.id.criterion);
 		holder.name.setTag(holder.atomPayment);
 

@@ -163,7 +163,7 @@
         android:background="@color/colorPrimary"
         android:cropToPadding="false"
         android:scaleType="centerInside"
-        android:onClick="cancel_edit"
+        android:onClick="finish_edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/arrow_left" />

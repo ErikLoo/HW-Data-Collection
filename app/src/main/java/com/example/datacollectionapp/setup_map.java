@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -32,6 +33,10 @@ public class setup_map extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
+    private EditText address_view;
+
+    private AtomPayment item_data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +46,15 @@ public class setup_map extends FragmentActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        address_view = (EditText) findViewById(R.id.address);
+        prepopulate();
     }
 
     @Override
     public void onBackPressed() { //if the "back" key was pressed...
 
 //        ready_to_cancel_activity();
-        cancel();
+        finish();
 
     }
 
@@ -56,10 +63,16 @@ public class setup_map extends FragmentActivity implements OnMapReadyCallback {
         cancel();
     }
 
+    private void prepopulate() {
+        item_data = (AtomPayment) getIntent().getSerializableExtra("push_data");
+
+        if(item_data.getLocation()!=null) {address_view.setText(item_data.getLocation());}
+
+    }
 
     public void finish( ) {
         Intent data = new Intent();
-        data.putExtra("act_name",act_name);
+        data.putExtra("address",address_view.getText().toString());
         setResult(RESULT_OK,data);
         super.finish();
     }
@@ -104,4 +117,7 @@ public class setup_map extends FragmentActivity implements OnMapReadyCallback {
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
+
+
+
 }
